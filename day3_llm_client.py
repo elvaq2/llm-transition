@@ -30,32 +30,51 @@
 # print(reply)
 
 
-def uart_send(*args,**kwargs):
-    print(f"args: {args}")
-    print(f"kwargs: {kwargs}")
+# def uart_send(*args,**kwargs):
+#     print(f"args: {args}")
+#     print(f"kwargs: {kwargs}")
 
 # uart_send("as","ef",kye1="value1",key2="value2")
+
+# class SensorClient:
+#     def __init__(self,sensor_id):
+#         self.sensor_id = sensor_id
+
+#     def read(self,*args,**kwargs):
+#         print(f"读取传感器号0x{self.sensor_id:02}")
+#         print(f"命令args{args}")
+#         print(f"配置kwargs{kwargs}")
+
+#         return {"sensor_id":self.sensor_id,"config":kwargs}
+#         # sample_rate = kwargs.get(sample_rate,1000)
+#         # gain = kwargs.get(gain,0.5)
+
+# sensor = SensorClient(sensor_id=0x0a)
+# data = sensor.read(
+#     "CH1","CH2",
+#     sample_rate = 1000,
+#     gain = 0.5,
+#     resolution = 12
+# )
+# print("返回数据：",data)
+
 
 class SensorClient:
     def __init__(self,sensor_id):
         self.sensor_id = sensor_id
 
     def read(self,*args,**kwargs):
-        print(f"读取传感器号0x{self.sensor_id:02}")
-        print(f"命令args{args}")
-        print(f"配置kwargs{kwargs}")
+        print(f"传感器号码：{self.sensor_id}")
+        print(f"传入：{args}")
+        print(f"配置：{kwargs}")
 
-        return {"sensor_id":self.sensor_id,"config":kwargs}
-        sample_rate = kwargs.get(sample_rate,1000)
-        gain = kwargs.get(gain,0.5)
+        return{"sensor id: ":self.sensor_id,"config: ":kwargs}
 
 sensor = SensorClient(sensor_id=0x0a)
-data = sensor.read(
-    "CH1","CH2",
-    sample_rate = 1000,
-    gain = 0.5,
-    resolution = 12
+sensor_data = sensor.read(
+    1,2,
+    k1=3,k2=4
 )
-print("返回数据：",data)
+print(sensor_data)
 
     

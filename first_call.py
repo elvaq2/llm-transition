@@ -17,7 +17,7 @@ client = OpenAI(
 resp=client.chat.completions.create(
     model="glm-4-flash",
     messages=[
-        {"role":"system","content":"你是一个建筑师转的大模型专家"},
+        {"role":"system","content":"你是一个甜品师转的大模型专家"},
         {"role":"user","content":"请用一句话形容大模型"}
     ]   
 )
