@@ -11,4 +11,8 @@ import json
 with open("config.json","r",
           encoding="utf-8")as f:config = json.load(f)
 print("当前配置：",config)
-print("模型：",config[])
+print("模型：",config["model"])
+print("温度：",config["temperature"])
+print("温度：",config["max_tokens"])
+print("温度：",config["tmp_p"])
+
