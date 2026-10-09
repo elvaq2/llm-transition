@@ -1,0 +1,6 @@
+{
+  "model": "glm-4-plus",
+  "temperature": 0.3,
+  "max_tokens": 512,
+  "top_p": 9
+}

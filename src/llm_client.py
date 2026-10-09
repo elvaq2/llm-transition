@@ -3,14 +3,17 @@ import json
 import time
 from openai import OpenAI
 from dotenv import load_dotenv
+from src.config import ModelConfig
 
 load_dotenv()
 
 class LLMClient:
     def __init__(self, config_path="config.json"):
         #读配置
-        with open("config.json","r",encoding="utf-8")as f:
-            self.config = json.load(f)
+        # with open("config.json","r",encoding="utf-8")as f:
+        #     self.config = json.load(f)#load成一个词典
+
+        self.config = ModelConfig.from_json(config_path)#返回一个ModelConfig对象
 
         #初始化客户端
         api_key = os.getenv("ZHIPU_API_KEY")
@@ -26,9 +29,12 @@ class LLMClient:
     def chat(self,prompt:str,max_tries=3,**kwargs):
         """带重试的对话方法"""
         #合并配置：kwargs优先级高于config.json
-        model = kwargs.get("model",self.config.get("model","glm-4-flash"))
-        temperature = kwargs.get("temperature",self.config.get("temperature",0.7))
-        max_tokens = kwargs.get("max_tokens",self.config.get("max_tokens",512))
+        # model = kwargs.get("model",self.config.get("model","glm-4-flash"))
+        model = kwargs.get("model",self.config.model)
+        # temperature = kwargs.get("temperature",self.config.get("temperature",0.7))
+        temperature = kwargs.get("temperature",self.config.temperature)
+        # max_tokens = kwargs.get("max_tokens",self.config.get("max_tokens",512))
+        max_tokens = kwargs.get("max_tokens",self.config.max_tokens)
 
         for attempt in range(1,max_tries+1):
             try:
