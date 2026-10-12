@@ -84,12 +84,19 @@ def raw_prompt_demo():
     print(f"消息内容：{formatted[0].content}\n")
 
     #手动调用LLM
-    response = llm.invoke(formatted)
-    print(f"LLM原始返回：{response}")
-    print(f"提取文本：{response.content}\n")
+    # # response = llm.invoke("你好")
+    # response = llm.invoke(formatted)
+    # print(f"LLM原始返回：{response}")
+    # print(f"提取文本：{response.content}\n")
 
+    #利用chain
+    chain = prompt|llm|StrOutputParser()
+    # res = chain.invoke(formatted)
+    res = chain.invoke({
+        "concept":"TCP/IP三次握手"
+    })
 
-
+    print(res)
 
 if __name__ == "__main__":
     # basic_chain_demo()
