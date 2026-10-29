@@ -23,8 +23,8 @@ def load_doc():
 #===============2、切片 =======================
 def split_doc(docs):
     spilitter = RecursiveCharacterTextSplitter(
-        chunk_size = 100,
-        chunk_overlap = 20,
+        chunk_size = 200,
+        chunk_overlap = 0,
         separators = ["\n\n","\n","。"," ",""]
     )
 
@@ -62,7 +62,10 @@ if __name__ == "__main__":
     docs = load_doc()
     chunks = split_doc(docs)
     vs = build_vectorstore(chunks)
+    vs.save_local("faiss_index")
 
-    search(vs,"elva之前是做什么工作的？")
-    search(vs,"RAG是什么意思")
-    search(vs,"有哪些向量数据库")
+    # search(vs,"elva之前是做什么工作的？")
+    # search(vs,"RAG是什么意思")
+    # search(vs,"有哪些向量数据库")
+    search(vs,"今天天气如何？")
+
